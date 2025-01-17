@@ -1,17 +1,19 @@
-import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
+import { GoogleLogin } from "@react-oauth/google";
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Login() {
   const responseMessage = (response) => {
-    // console.log(response);
-    const token = response.credential;
-    const decoded = jwtDecode(token);
-    console.log(decoded);
-  };
-  const errorMessage = (error) => {
-    console.log(error);
-  };
+      // console.log(response);
+      const token = response.credential;
+      const decoded = jwtDecode(token);
+      console.log(decoded);
+    };
+    const errorMessage = (error) => {
+      console.log(error);
+    };
+
   return (
     <>
       <div className="py-8 bg-white">
@@ -22,6 +24,14 @@ function Login() {
         </h3>
         <div className="flex justify-center items-center bg-white px-3">
           <form className="w-full max-w-md p-6 space-y-4 bg-white border border-gray-200 rounded-lg shadow-md">
+            <div className="flex justify-center w-full">
+                  <GoogleLogin onSuccess={responseMessage} onError={errorMessage}/>
+                </div>
+            <div className="flex items-center space-x-2">
+              <div className="flex-grow h-[1px] bg-gray-300"></div>
+              <p className="text-sm text-gray-500">Or With</p>
+              <div className="flex-grow h-[1px] bg-gray-300"></div>
+            </div>
             <div>
               <label
                 for="email"
@@ -61,31 +71,28 @@ function Login() {
                 <input type="checkbox" className="rounded border-gray-300" />
                 <span>Remember me</span>
               </label>
-              <a
-                href="/auth/forgot-password"
+              <Link
+                to="/forgot-password"
                 className="text-sm text-blue-500 hover:underline"
               >
                 Forgot password?
-              </a>
+              </Link>
             </div>
+            <Link to="/user-dashboard">
             <button
               type="submit"
-              className="w-full bg-[#A80000] text-white hover:bg-[#8A0000] py-2 rounded-md"
+              className="w-full bg-[#A80000] text-white hover:bg-[#8A0000] py-2 rounded-md mt-3 "
             >
               Sign In
             </button>
+            </Link >
             <p className="text-center text-sm">
               Don’t have an account?
-              <a href="/" className="text-blue-500 hover:underline">
+              <Link to="/signup" className="text-blue-500 hover:underline">
                 {" "}
                 Sign Up
-              </a>
+              </Link>
             </p>
-            <div className="flex items-center space-x-2">
-              <div className="flex-grow h-[1px] bg-gray-300"></div>
-              <p className="text-sm text-gray-500">Or With</p>
-              <div className="flex-grow h-[1px] bg-gray-300"></div>
-            </div>
             {/* <button
               type="button"
               className="flex items-center justify-center w-full border border-gray-300 rounded-lg py-2 hover:bg-gray-100"
@@ -97,7 +104,6 @@ function Login() {
               />
               Sign in with Google
             </button> */}
-            <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
           </form>
         </div>
       </div>
