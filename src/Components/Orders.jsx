@@ -23,7 +23,7 @@ function Orders() {
         (order) => activeTab === "all" || order.status === activeTab
       );
   return (
- <section className="bg-white pt-12 p-6 w-full max-w-xl">
+ <section className="bg-white p-6 rounded-lg shadow-md flex-1">
  <div className="flex justify-between items-center border-b pb-2 mb-4">
    <div className="flex space-x-4 w-full place-content-evenly ">
      <button
